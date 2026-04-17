@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -U pip
+          python -m pip install -e ".[dev]"
+
+      - name: Ruff
+        run: python -m ruff check src tests
+
+      - name: Mypy
+        run: python -m mypy src
+
+      - name: Pytest
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest -q
+
+      - name: Build
+        run: python -m build
+
+      - name: Twine Check
+        run: python scripts/twine_check.py
+
+      - name: Distribution Smoke Test
+        run: python scripts/dist_smoke_test.py

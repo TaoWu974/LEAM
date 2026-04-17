@@ -1,0 +1,42 @@
+# Local config
+config.json
+
+# Python cache / compiled
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Python environments
+.venv/
+.venv-*/
+
+# Local environment files / secrets
+.env
+.env.*
+
+# Packaging artifacts
+*.egg-info/
+*.egg
+build/
+dist/
+pip-wheel-metadata/
+output/
+
+# Test / lint / type-check caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+
+# Logs
+*.log
+batch.log
+
+# Windows metadata
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,95 @@
+name: Publish To PyPI
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+jobs:
+  build-and-validate:
+    name: Build and validate distributions on Windows
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    env:
+      RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate release tag
+        shell: pwsh
+        run: |
+          $tag = "${env:RELEASE_TAG}"
+          if ([string]::IsNullOrWhiteSpace($tag)) {
+            throw "Unable to determine release tag."
+          }
+          if ($tag -notmatch '^v[0-9]') {
+            throw "PyPI publish only runs from version tags like v0.3.0. Got: $tag"
+          }
+          @'
+          import os
+          import sys
+          import tomllib
+          from pathlib import Path
+
+          tag = os.environ["RELEASE_TAG"]
+          version = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))["project"]["version"]
+          expected = f"v{version}"
+          if tag != expected:
+              print(f"Tag/version mismatch: tag={tag!r}, pyproject={expected!r}", file=sys.stderr)
+              sys.exit(1)
+          print(f"Validated release tag {tag} against pyproject version {version}.")
+          '@ | python -
+
+      - name: Install build tooling
+        run: python -m pip install -U pip build twine
+
+      - name: Build distributions
+        run: python -m build
+
+      - name: Verify distributions
+        run: python scripts/twine_check.py
+
+      - name: Windows distribution smoke test
+        run: python scripts/dist_smoke_test.py
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/*
+          if-no-files-found: error
+
+  publish:
+    name: Publish distributions
+    needs: build-and-validate
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Attach distributions to GitHub release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
+
+      # `pypa/gh-action-pypi-publish` is Linux-only, so Windows validation and
+      # PyPI upload stay split across jobs.
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1

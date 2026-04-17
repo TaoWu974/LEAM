@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEAM</title>
+  <meta
+    name="description"
+    content="LEAM is a research toolkit for LLM-enabled antenna modeling with CST and HFSS."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="../README.md">
+          <span>LEAM</span>
+        </a>
+        <div class="nav-links">
+          <a href="https://github.com/TaoWu974/LEAM/blob/main/README.md">README</a>
+          <a href="https://github.com/TaoWu974/LEAM/tree/main/docs">Docs</a>
+          <a href="https://arxiv.org/pdf/2504.18271">Paper</a>
+          <a href="https://github.com/TaoWu974/LEAM">GitHub</a>
+        </div>
+      </nav>
+
+      <section class="hero-layout">
+        <div class="hero-content">
+          <p class="eyebrow">LLM-Enabled Antenna Modeling</p>
+          <h1>Large Language Model-Enabled Antenna Modeling</h1>
+          <p class="hero-copy">
+            LEAM is an open-source research toolkit for parameterized antenna
+            modeling. It supports both CST and HFSS, provides a Windows desktop
+            interface for interactive use, and can connect naturally with
+            downstream simulation and optimization workflows.
+          </p>
+          <p class="hero-copy hero-copy-secondary">
+            LEAM works from textual and image-based antenna descriptions drawn
+            from technical reports, research papers, patents, and other
+            engineering documents, helping users move from descriptive source
+            material to analyzable EM models.
+          </p>
+          <p class="hero-copy hero-copy-tertiary">
+            LEAM can export parameterized CST and HFSS antenna models together
+            with structured intermediate representations such as parameters and
+            geometry-related modeling data. This makes antenna models easier to
+            store, review, reuse, and extend, while also supporting the
+            digitization of legacy antenna design data and the activation of
+            underused engineering assets.
+          </p>
+        </div>
+
+        <aside class="hero-aside" aria-label="Project highlights">
+          <figure class="hero-visual">
+            <img class="hero-logo" src="assets/leam-logo.png" alt="LEAM logo based on a DALL-E-generated image of Ben Nevis in the Scottish Highlands">
+            <figcaption class="hero-visual-caption">
+              The LEAM logo is a DALL-E-generated image of Ben Nevis, the highest mountain in UK. In Scottish
+              poets, <strong>leam</strong> means to gleam or shine.
+            </figcaption>
+          </figure>
+          <div class="hero-facts" aria-label="LEAM highlights">
+            <article class="fact-card fact-card-primary">
+              <p class="section-label">How LEAM Works</p>
+              <p>
+                Prompt-centric CST and HFSS workflows with inspectable
+                intermediate artifacts.
+              </p>
+            </article>
+            <article class="fact-card">
+              <p class="section-label">How It Fits</p>
+              <p>
+                A workflow layer between antenna description and local EM
+                simulation.
+              </p>
+            </article>
+          </div>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="panel panel-grid" aria-labelledby="overview-title">
+        <div>
+          <p class="section-label">Overview</p>
+          <h2 id="overview-title">A practical stack for LLM-assisted antenna modeling</h2>
+          <p class="overview-copy">
+            LEAM combines an LLM layer, simulator-facing modeling workflows,
+            and structured intermediate data so that antenna descriptions can
+            be turned into reusable EM modeling assets rather than one-off
+            generation results.
+          </p>
+          <p class="overview-copy">
+            In practical terms, the stack is built around OpenAI-driven
+            multimodal understanding, CST and HFSS support, a Windows desktop
+            interface, and structured parameter or geometry data that can be
+            stored, reviewed, and reused across projects.
+          </p>
+        </div>
+        <div class="card-list">
+          <article class="card">
+            <h3>LLM Layer</h3>
+            <p>
+              LEAM currently uses OpenAI models for multimodal antenna
+              understanding and model generation, with room for future LLM API
+              support.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Simulator Layer</h3>
+            <p>
+              LEAM supports both CST and HFSS, translating antenna
+              descriptions into EM models inside the tools engineers already
+              use.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Workflow And Data</h3>
+            <p>
+              A Windows desktop GUI and structured parameter or geometry data
+              make modeling sessions easier to review, store, and reuse.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel panel-grid" aria-labelledby="docs-title">
+        <div>
+          <p class="section-label">Navigation</p>
+          <h2 id="docs-title">Docs, desktop guidance, and API entry points</h2>
+          <p class="overview-copy">
+            The README gives the short version. The docs set is split by use
+            case so antenna engineers can go straight to desktop onboarding,
+            while script users can jump directly to the Python surface.
+          </p>
+          <p class="overview-copy">
+            The main documentation now lives in three focused pages: desktop
+            onboarding, workflow reference, and Python API.
+          </p>
+        </div>
+        <div class="card-list">
+          <article class="card">
+            <h3>Desktop</h3>
+            <p>
+              Install LEAM, set <code>OPENAI_API_KEY</code>, launch
+              <code>leam-desktop</code>, and understand the normal first-run
+              path.
+            </p>
+            <p><a class="inline-link" href="https://github.com/TaoWu974/LEAM/blob/main/docs/getting_started.md">Open getting started</a></p>
+          </article>
+          <article class="card">
+            <h3>Workflow</h3>
+            <p>
+              Read the exact desktop behavior for workspaces, optional branches,
+              attachment handling, and execution gates.
+            </p>
+            <p><a class="inline-link" href="https://github.com/TaoWu974/LEAM/blob/main/docs/workflow_reference.md">Open workflow reference</a></p>
+          </article>
+          <article class="card">
+            <h3>API</h3>
+            <p>
+              Use the Python API page for backend wrappers, runtime helpers,
+              and programmatic access to built-in examples.
+            </p>
+            <p><a class="inline-link" href="https://github.com/TaoWu974/LEAM/blob/main/docs/python_api.md">Open Python API</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel spotlight" aria-labelledby="next-title">
+        <p class="section-label">Workflow</p>
+        <h2 id="next-title">A workflow layer between description and EM simulation</h2>
+        <p class="workflow-intro">
+          LEAM organizes antenna modeling into staged generation, review, and
+          optional execution steps.
+        </p>
+        <div class="workflow-flow" aria-label="LEAM workflow steps">
+          <div class="workflow-row">
+            <div class="flow-step">
+              <div class="flow-node flow-node-designer">
+                <span class="flow-chip flow-chip-designer">Designer</span>
+                <span>Initial<br>Solids</span>
+              </div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard">Parameters</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard">Materials</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard">Solids</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-decision">
+                <span class="flow-chip flow-chip-decision">Decision</span>
+                <span>Check<br>Solid</span>
+              </div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard">Dimensions</div>
+            </div>
+          </div>
+
+          <div class="workflow-turn-row" aria-hidden="true">
+            <div class="workflow-turn"></div>
+          </div>
+
+          <div class="workflow-row workflow-row-reverse">
+            <div class="flow-step">
+              <div class="flow-node flow-node-optional">
+                <span class="flow-chip">Optional</span>
+                <span>Run<br>Update</span>
+              </div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-optional">
+                <span class="flow-chip">Optional</span>
+                <span>Parameter<br>Update</span>
+              </div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard flow-node-wide">Run Simulator</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard">Boolean</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-optional">
+                <span class="flow-chip">Optional</span>
+                <span>2.5D<br>Model</span>
+              </div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true"></div>
+            <div class="flow-step">
+              <div class="flow-node flow-node-standard">3D Model</div>
+            </div>
+          </div>
+        </div>
+        <div class="workflow-meta">
+          <p class="workflow-note">
+            Execution stays separate so intermediate results can be checked and
+            revised before simulator runs.
+          </p>
+          <div class="workflow-legend" aria-label="Workflow legend">
+            <span class="legend-item legend-item-designer"><span class="legend-chip legend-chip-designer">Designer</span> Corresponding to the `weak_description` workflow in the GUI.</span>
+            <span class="legend-item legend-item-optional"><span class="legend-chip legend-chip-optional">Optional</span> Enabled only when the selected workspace settings turn that branch on.</span>
+            <span class="legend-item legend-item-decision"><span class="legend-chip legend-chip-decision">Decision</span> Review step that can route issues back upstream before model generation continues.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel terminal-section" aria-labelledby="terminal-title">
+        <div class="terminal-copy">
+          <p class="section-label">Quick Start</p>
+          <h2 id="terminal-title">Launch LEAM from Python 3.11 on Windows</h2>
+          <p class="terminal-copy-line">
+            LEAM Desktop currently targets Windows, requires an OpenAI API key,
+            and needs at least one local CST or HFSS install.
+          </p>
+          <p class="terminal-copy-line">
+            Normal users do not need a virtual environment or a separate
+            configure step.
+          </p>
+        </div>
+
+          <div class="terminal-showcase">
+            <div class="terminal-window" aria-label="LEAM startup commands">
+              <div class="terminal-topbar">
+                <div class="terminal-lights" aria-hidden="true">
+                  <span class="light light-red"></span>
+                  <span class="light light-yellow"></span>
+                  <span class="light light-green"></span>
+                </div>
+                <div class="terminal-title">LEAM / desktop quick start</div>
+              </div>
+
+              <div class="terminal-body">
+                <div class="terminal-screen">
+                  <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="arg">pip</span>
+                    <span class="arg">install</span>
+                    <span class="arg">leam</span>
+                  </div>
+                  <div class="terminal-line terminal-line-muted">
+                    <span class="status-mark">[ok]</span>
+                    <span class="status-text">Installed LEAM Desktop with CST/HFSS support in the base package</span>
+                  </div>
+                  <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="env">$env:OPENAI_API_KEY</span>
+                    <span class="operator">=</span>
+                    <span class="string">"your_api_key_here"</span>
+                  </div>
+                  <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="cmd">leam-desktop</span>
+                    <span class="cursor" aria-hidden="true"></span>
+                  </div>
+                  <div class="terminal-output">
+                    <p>LEAM will auto-detect CST and HFSS on first launch. If `leam-desktop` is not on PATH yet, run `py -3.11 -m leam.desktop`.</p>
+                  </div>
+                </div>
+
+                <div class="terminal-preview">
+                  <img class="gui-preview-floating" src="assets/GUI_page.png" alt="LEAM desktop GUI preview">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

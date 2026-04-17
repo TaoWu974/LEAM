@@ -1,0 +1,118 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leam"
+version = "0.3.0"
+description = "Research toolkit for LLM-enabled antenna modeling with CST and HFSS"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = "MIT"
+authors = [
+  {name = "Tao Wu"},
+]
+maintainers = [
+  {name = "Tao Wu"},
+]
+keywords = ["antenna", "electromagnetics", "cst", "hfss", "llm"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3 :: Only",
+  "Operating System :: Microsoft :: Windows",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
+]
+dependencies = [
+  "openai>=2.0.0",
+  "PySide6>=6.7",
+  "pyaedt==0.25.1",
+  "pandas>=2.2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/TaoWu974/LEAM"
+Documentation = "https://taowu974.github.io/LEAM/"
+Paper = "https://arxiv.org/abs/2504.18271"
+Repository = "https://github.com/TaoWu974/LEAM"
+Source = "https://github.com/TaoWu974/LEAM"
+"Getting Started" = "https://github.com/TaoWu974/LEAM/blob/main/docs/getting_started.md"
+"Workflow Reference" = "https://github.com/TaoWu974/LEAM/blob/main/docs/workflow_reference.md"
+"Python API" = "https://github.com/TaoWu974/LEAM/blob/main/docs/python_api.md"
+"Release Checklist" = "https://github.com/TaoWu974/LEAM/blob/main/.github/release_checklist.md"
+Issues = "https://github.com/TaoWu974/LEAM/issues"
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.0",
+  "mypy>=1.11.0",
+  "pytest>=8.0.0",
+  "pytest-cov>=5.0.0",
+  "ruff>=0.12.0",
+  "twine>=5.1.0",
+]
+
+[project.scripts]
+leam-configure = "leam.config:main"
+
+[project.gui-scripts]
+leam-desktop = "leam.desktop.app:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+leam = [
+  "backends/cst/prompts/*.md",
+  "backends/cst/resources/*.md",
+  "backends/hfss/prompts/*.md",
+  "backends/hfss/resources/*.md",
+  "resources/*.json",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+src = ["src", "tests"]
+exclude = [
+  ".git",
+  ".venv",
+  "build",
+  "dist",
+  "assets",
+  "docs",
+  "examples",
+  "output",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# Long prompt strings, GUI labels, and assertion text are common here; keep CI
+# focused on correctness/import hygiene instead of hard line wrapping.
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# These modules are heavily dynamic today: simulator bridges and the PySide
+# desktop stack are still better covered by runtime tests than strict typing.
+module = [
+  "leam.backends.cst.tools.cst_runner",
+  "leam.backends.cst.tools.solids_generator",
+  "leam.backends.hfss.tools.hfss_runner",
+  "leam.backends.hfss.tools.solids_generator",
+  "leam.desktop.*",
+]
+ignore_errors = true
