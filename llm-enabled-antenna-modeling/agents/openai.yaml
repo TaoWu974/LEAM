@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM-Enabled Antenna Modeling"
+  short_description: "Generate or execute CST/HFSS antenna modeling workflows"
+  default_prompt: "Use $llm-enabled-antenna-modeling to detect the available CST/HFSS backend and turn an antenna description and attachments into simulator-ready modeling artifacts or project workflows."

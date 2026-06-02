@@ -158,6 +158,17 @@ see the advanced setup sections in
 - Workflow reference: https://github.com/TaoWu974/LEAM/blob/main/docs/workflow_reference.md
 - Python API: https://github.com/TaoWu974/LEAM/blob/main/docs/python_api.md
 
+## Codex Skill
+
+This repository also includes a Codex skill at
+[`llm-enabled-antenna-modeling/`](llm-enabled-antenna-modeling/) for agentic
+antenna modeling workflows.
+
+The skill distills LEAM's CST/HFSS modeling flow into instructions and
+references that a coding agent can use to select an available simulator
+backend, produce staged modeling artifacts, and optionally create CST or HFSS
+project workflows.
+
 ## Python API
 
 If you want to use LEAM as a Python library instead of the desktop app, start
